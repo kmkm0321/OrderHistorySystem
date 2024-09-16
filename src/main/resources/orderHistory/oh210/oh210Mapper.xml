@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapperインターフェース参照先 -->
+<mapper namespace="orderHistory.oh210.Oh210Mapper">
+  
+  <!-- 売り上げ履歴用SQL -->
+  <select id="selectSalesHistory" parameterType="orderHistory.oh210.Oh210ReqSearchDto" resultType="orderHistory.oh210.Oh210ResSalesHistoryDto">
+	select
+		TBL06.area_name as areaName,
+		TBL05.prefecture_name as prefName,
+		TBL03.shop_name as shopName,
+		TBL04.family_name || TBL04.first_name as fullName,
+		sum(TBL01.quantity * TBL02.price) as totalSales
+	from orders.order_historys TBL01
+		inner join orders.products TBL02 
+			on TBL01.product_code = TBL02.product_code
+		inner join orders.shops TBL03 
+			on TBL01.shop_code = TBL03.shop_code
+		inner join orders.employees TBL04 
+			on TBL01.seller = TBL04.emp_code
+		inner join orders.prefectures TBL05 
+			on TBL03.prefecture_code = TBL05.prefecture_code
+		inner join orders.areas TBL06 
+			on TBL05.area_code = TBL06.area_code
+	<where>
+		<!--あいまい検索のさいCONCATを使わないとエラー-->
+		<if test='yearAndMonth != null'>
+			to_char(TBL01.order_date, 'YYYYMM') like CONCAT(#{yearAndMonth}, '%')
+		</if>
+		<if test='areasValue != "0"'>
+			AND TBL06.area_code = #{areasValue}
+		</if>
+		<if test='prefsValue != "0"'>
+			AND TBL05.prefecture_code = #{prefsValue}
+		</if>
+		<if test='shopsValue != "0"'>
+			AND TBL03.shop_code = #{shopsValue}
+		</if>
+	</where>
+	group by 
+		TBL03.shop_name,
+		TBL04.family_name,
+		TBL04.first_name, 
+		TBL05.prefecture_name, 
+		TBL06.area_name
+	order by totalSales desc
+  </select>
+  
+  <!-- テスト用SQL -->
+  <select id="selectTest" parameterType="orderHistory.oh210.Oh210ReqTestValueDto" resultType="orderHistory.oh210.Oh210ResTestMapDto">
+    select
+    	emp_code as empCode, family_name as familyName, first_name as firstName
+    from employees
+   	where shop_code = #{shopCode}
+  </select>
+  
+</mapper>

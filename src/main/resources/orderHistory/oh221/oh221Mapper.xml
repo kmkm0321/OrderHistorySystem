@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapperインターフェース参照先 -->
+<mapper namespace="orderHistory.oh221.Oh221Mapper">
+  
+  <!-- 編集用社員情報取得用SQL -->
+  <select id="getEmployeesInfo" parameterType="String" resultType="orderHistory.oh221.Oh221EmployeesInfoDto">
+        SELECT
+            emp_id AS empId
+            , TBL01.emp_code AS empCode
+            , TBL01.family_name AS familyName
+            , TBL01.first_name AS firstName
+            , TBL01.family_kana AS familyKana
+            , TBL01.first_kana AS firstKana
+            , TBL01.phone AS phone
+            , TBL01.email AS email
+            , TBL01.birthday AS birthday
+            , TBL01.gender_code AS genderCode
+            , TBL01.shop_code AS shopCode
+            , TBL02.shop_name AS shopName
+            , TBL01.title_code AS titleCode
+            , TBL03.title_name AS titleName
+        FROM
+            orders.employees TBL01 
+            INNER JOIN orders.shops TBL02 
+                ON TBL02.shop_code = TBL01.shop_code 
+            INNER JOIN orders.emp_titles TBL03 
+                ON TBL03.title_code = TBL01.title_code 
+    <where>
+            AND TBL01.emp_id = #{empId}
+    </where>
+  </select>
+  
+</mapper>

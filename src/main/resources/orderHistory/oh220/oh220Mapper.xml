@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapperインターフェース参照先 -->
+<mapper namespace="orderHistory.oh220.Oh220Mapper">
+  
+  <!-- 編集用社員一覧取得用SQL -->
+  <select id="getEmployeesList" parameterType="orderHistory.oh220.Oh220ReqSearchDto" resultType="orderHistory.oh220.Oh220ResEmployeesListDto">
+        select
+            TBL02.title_code as titleCode
+            , TBL02.title_name as titleName
+            , TBL01.emp_code as empCode
+            , TBL01.family_name || TBL01.first_name as fullName
+            , TBL03.shop_code as shopCode
+            , TBL03.shop_name as shopName
+            , TBL04.prefecture_name as prefName
+            , TBL05.area_name as areaName 
+            , TBL01.emp_id as empId
+        from
+            orders.employees TBL01 
+            inner join orders.emp_titles TBL02 
+                on TBL02.title_code = TBL01.title_code 
+            inner join orders.shops TBL03 
+                on TBL03.shop_code = TBL01.shop_code 
+            inner join orders.prefectures TBL04 
+                on TBL04.prefecture_code = TBL03.prefecture_code 
+            inner join orders.areas TBL05 
+                on TBL05.area_code = TBL04.area_code
+    <where>
+        <if test='areasValue != "0"'>
+            AND TBL05.area_code = #{areasValue}
+        </if>
+        <if test='prefsValue != "0"'>
+            AND TBL04.prefecture_code = #{prefsValue}
+        </if>
+        <if test='shopsValue != "0"'>
+            AND TBL03.shop_code = #{shopsValue}
+        </if>
+    </where>
+        order by empCode, fullName, shopCode
+  </select>
+  
+</mapper>

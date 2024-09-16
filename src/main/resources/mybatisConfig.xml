@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--DB側スネークケース　⇒　キャメルケース自動変換設定 うまくいかない-->
+	<!-- 
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="org.postgresql.Driver" />
+				<property name="url" value="jdbc:postgresql://localhost:5432/crud-sample?currentSchema=orders" />
+				<property name="username" value="crud-sample" />
+				<property name="password" value="pass" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- SQL定義用xmlファイル参照先 -->
+	<mappers>
+		<mapper resource="orderHistory/oh210/oh210Mapper.xml" />
+        <mapper resource="orderHistory/oh220/oh220Mapper.xml" />
+	</mappers>
+</configuration>

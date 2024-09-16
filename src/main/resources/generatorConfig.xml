@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="context1" targetRuntime="MyBatis3">
+  	<!-- DB接続設定 -->
+    <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/crud-sample?currentSchema=orders" 
+    	driverClass="org.postgresql.Driver" 
+    	password="pass" 
+    	userId="crud-sample">
+	</jdbcConnection>
+    	
+    <!-- Select結果がマッピングされる、Javaモデルの出力場所 -->
+    <javaModelGenerator targetPackage="orderHistory.entity" 
+    	targetProject="OrderHistorySystem/src/main/java/">
+	</javaModelGenerator>
+    
+    <!-- SQL 設定が記述された XML を生成する場所 -->	
+	<sqlMapGenerator targetPackage="orderHistory.mappers" 
+		targetProject="OrderHistorySystem/src/main/resources">
+	</sqlMapGenerator>
+    
+    <!-- Mapperインターフェースの出力場所 -->
+    <javaClientGenerator targetPackage="orderHistory.mappers" 
+    	targetProject="OrderHistorySystem/src/main/java/" 
+    	type="XMLMAPPER">
+	</javaClientGenerator>
+	
+	<!-- 自動生成するテーブルの設定 -->
+	<table tableName="areas"></table>
+	<table tableName="citys"></table>
+	<table tableName="customers"></table>
+	<table tableName="emp_titles"></table>
+	<table tableName="employees">
+        <columnOverride column="birthday" javaType="String"/>
+    </table>
+	<table tableName="order_historys"></table>
+	<table tableName="prefectures"></table>
+    <table tableName="products"></table>
+    <table tableName="shops"></table>
+  </context>
+</generatorConfiguration>

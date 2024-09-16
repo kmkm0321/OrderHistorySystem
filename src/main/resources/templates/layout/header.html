@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+	<script th:src="@{/webjars/datatables/1.11.3/js/jquery.dataTables.min.js}"></script>	
+	<script th:src="@{/js/layout/header.js}"></script>
+	<link rel="stylesheet" th:href="@{/webjars/bulma/0.9.4/css/bulma.min.css}">
+	<link rel="stylesheet" th:href="@{/webjars/datatables/1.11.3/css/jquery.dataTables.css}">
+	<link rel="stylesheet" th:href="@{/css/layout/header.css}">
+</head>
+<body>
+
+	<div class="pb-6 has-background-light" style="min-height:100vh">
+		<nav class="navbar has-shadow mb-6" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item has-text-weight-bold is-size-4" th:href=@{/}>TOP</a>
+				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+			 <div id="menu" class="navbar-menu">
+			 	<a class="navbar-item" th:href=@{/oh210/sales_managed}>売上履歴</a>
+				<a class="navbar-item" th:href=@{/oh220/employees_edit}>社員編集（検索）</a>
+			</div>
+		</nav>
+
+		<!-- 各htmlが挿入される部分、フラグ位置 -->
+		<div class="ml-6 mr-6">
+			<div layout:fragment="main" th:remove="tag"></div>
+		</div>
+	</div>
+	
+</body>
+</html>

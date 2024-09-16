@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+<title>社員編集（検索）</title>
+    <script th:src="@{/js/oh220/employeesEdit.js}"></script>
+</head>
+<body>
+    
+    <!-- thymeleafレイアウトに挿入する部分を囲む -->
+    <div layout:fragment="main">
+        <nav class="breadcrumb has-dot-separator" aria-label="パンくずリスト">
+            <ul>
+                <li><a href="/">TOP</a></li>
+                <li class="is-active"><a href="#" aria-current="page">社員編集（検索）</a></li>
+            </ul>
+        </nav>
+        
+        <div class="ml-6 mr-6">
+            <div class="box">
+                <h2 class="title mb-6">社員編集</h2>
+                <div class="mb-6 columns">
+                    <div class="column is-2">
+                        <span class="">エリア</span>
+                        <select id="area" class="">
+                            <option value="0" selected>未選択</option>
+                            <option th:each="area:${areas}" th:value="${area.areaCode}" th:text="${area.areaName}"></option>
+                        </select>
+                    </div>
+                    <div class="column is-2">
+                        <span>都道府県</span>
+                        <select id="pref">
+                            <option value="0" selected>未選択</option>
+                        </select>
+                    </div>
+                    <div class="column is-2">
+                        <span>店舗</span>
+                        <select id="shop">
+                            <option value="0" selected>未選択</option>
+                        </select>           
+                    </div>
+                    <div class="column is-1">
+                        <button id="search" class="button is-fullwidth has-background-light">検索</button>
+                    </div>
+                </div>
+            </div>
+            <div class="box" style="min-height:100px">
+                <table id="employeesList">
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

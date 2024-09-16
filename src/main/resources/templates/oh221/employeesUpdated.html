@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+<title>社員情報更新完了</title>
+
+</head>
+<body>
+
+    <!-- thymeleafレイアウトに挿入する部分を囲む -->
+    <div layout:fragment="main">
+        <nav class="breadcrumb has-dot-separator" aria-label="パンくずリスト">
+            <ul>
+                <li><a href="/">TOP</a></li>
+                <li><a href="/oh220/employees_edit">社員編集（検索）</a></li>
+                <li><a href="#" aria-current="page">編集</a></li>
+                <li class="is-active"><a href="#" aria-current="page">社員情報更新完了</a></li>
+            </ul>
+        </nav>
+    
+    </div>
+
+</body>
+
+</html>

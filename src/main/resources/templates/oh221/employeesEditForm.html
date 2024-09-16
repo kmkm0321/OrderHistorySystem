@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/header}">
+<head>
+<meta charset="UTF-8">
+<title>社員情報編集</title>
+    <script th:src="@{/js/oh221/employeesEditForm.js}"></script>
+</head>
+<body>
+
+    <!-- thymeleafレイアウトに挿入する部分を囲む -->
+    <div layout:fragment="main">
+        <nav class="breadcrumb has-dot-separator" aria-label="パンくずリスト">
+            <ul>
+                <li><a href="/">TOP</a></li>
+                <li><a href="/oh220/employees_edit">社員編集（検索）</a></li>
+                <li class="is-active"><a href="#" aria-current="page">社員情報編集</a></li>
+            </ul>
+        </nav>
+    
+        <div class="ml-6 mr-6">
+            <div class="box">
+                <h2 class="title mb-6">社員情報編集</h2>
+                <div class="columns is-centered my-6">
+                    <form id="employeesForm" th:method="post" th:action="@{/}" th:object="${employeesInfo}">
+                        <input type="hidden" name="empId" th:field="*{empId}">
+                        <div class="columns">
+                            <div class="field column is-8">
+                                <label class="label" for="empCode">社員コード</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="empCode" name="empCode" th:field="*{empCode}"　readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="field column is-6">
+                                <label class="label" for="shopName">店舗</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" id="shopName" name="shopName" th:field="*{shopName}">
+                                </div>
+                            </div>
+                            <div class="field column is-8">
+                                <label class="label" for="titleName">役職</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" id="titleName" name="titleName" th:field="*{titleName}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="field column is-7">
+                                <label class="label" for="familyName">姓</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" id="familyName" name="familyName" th:field="*{familyName}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('familyName')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{familyName}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="field column is-7">
+                                <label class="label" for="firstName">名</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" id="firstName" name="firstName" th:field="*{firstName}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('firstName')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{firstName}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="field column is-7">
+                                <label class="label" for="familyKana">姓（かな）</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" familyKana="familyKana" name="familyKana"　th:field="*{familyKana}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('familyKana')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{familyKana}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="field column is-7">
+                                <label class="label" for="firstKana">名（かな）</label>
+                                <div class="control level-item">
+                                    <input class="input" type="text" id="firstKana" name="firstKana"
+                                        th:field="*{firstKana}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('firstKana')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{firstKana}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="field column is-7">
+                                <label class="label" for="phone">電話番号（ハイフンなし）</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="phone" name="phone" th:field="*{phone}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('phone')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{phone}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="field column is-7">
+                                <label class="label" for="email">メールアドレス</label>
+                                <div class="control">
+                                    <input class="input" type="text" id="email" name="email" th:field="*{email}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('email')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{email}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="field column is-7">
+                                <label class="label" for="birthday">生年月日</label>
+                                <div class="control">
+                                    <input class="input" type="date" id="birthday" name="birthday" th:field="*{birthday}">
+                                </div>
+                                <article th:if="${#fields.hasErrors('birthday')}" class="message is-danger is-small">
+                                    <div class="message-body">
+                                        <span th:errors="*{birthday}"></span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="field column is-7">
+                                <label class="label" for="genderCode">性別</label>
+                                <div class="select">
+                                    <select id="genderCode" name="genderCode" th:field="*{genderCode}">
+                                        <option value="G-1">男性</option>
+                                        <option value="G-2">女性</option>
+                                        <option value="G-0">その他</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <button class="button is-dark" type="button">送信</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
